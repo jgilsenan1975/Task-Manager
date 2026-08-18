@@ -14,14 +14,17 @@ Users can register and sign in, create projects, and manage tasks on a drag-and-
 
 ```
 task-manager-portfolio/
+├── .github/workflows/        GitHub Actions: build + deploy to Azure on push
 ├── backend/                  ASP.NET Core Web API
 │   └── TaskManager.Api/
 │       ├── Controllers/      Auth, Projects, Tasks endpoints
 │       ├── Data/             EF Core DbContext
 │       ├── Dtos/             Request/response contracts
 │       ├── Models/           Entity classes (User, Project, TaskItem, TaskComment)
-│       └── Services/         Password hashing, JWT token issuing
+│       ├── Services/         Password hashing, JWT token issuing
+│       └── wwwroot/          Angular build lands here at publish time (empty in git)
 ├── database/                 Reference SQL scripts (schema mirrors the EF model)
+├── DEPLOYMENT.md             Step-by-step Azure hosting guide
 └── frontend/                 Angular application
     └── src/app/
         ├── core/             Services, models, route guard, HTTP interceptor
@@ -89,6 +92,10 @@ npm start
 
 The app runs at `http://localhost:4200` and expects the API at `https://localhost:5001/api` (see `src/environments/environment.ts`).
 
+## Deploying it
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for a full walkthrough of hosting this on Azure: creating the App Service and Azure SQL Database, wiring up the connection string and JWT secret, and setting up the GitHub Actions workflow (already included at `.github/workflows/deploy.yml`) so every push to `main` deploys automatically.
+
 ## Possible next steps
 
 A few natural extensions if you want to keep building this out for your portfolio:
@@ -97,8 +104,7 @@ A few natural extensions if you want to keep building this out for your portfoli
 - Task comments and file attachments (the `TaskComment` entity already exists in the model)
 - Role-based project membership instead of single-owner projects
 - A dashboard view with charts (e.g. tasks completed per week)
-- CI pipeline (GitHub Actions) running `dotnet test` and `ng test` on push
-- Deploying the API to Azure App Service and the frontend to a static host, with the SQL Server database in Azure SQL
+- Add `dotnet test` and `ng test` steps to the GitHub Actions workflow so the build fails on broken tests, not just broken deploys
 
 ## License
 

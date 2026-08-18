@@ -84,6 +84,16 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// Apply pending EF Core migrations automatically on startup. This is a
+// reasonable shortcut for a single-instance portfolio deployment; a team
+// running multiple instances in production would typically run migrations
+// as a separate release step instead.
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
+
 // Middleware pipeline
 if (app.Environment.IsDevelopment())
 {
@@ -99,5 +109,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Serve the built Angular app (copied into wwwroot at publish time) and
+// fall back to index.html for any route that isn't an API call, so
+// Angular's client-side router handles deep links like /projects/3/board.
+app.UseDefaultFiles();
+app.UseStaticFiles();
+app.MapFallbackToFile("index.html");
 
 app.Run();

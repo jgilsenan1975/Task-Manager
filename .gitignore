@@ -3,7 +3,11 @@ backend/**/bin/
 backend/**/obj/
 *.user
 *.suo
-.vs/
+
+# Angular build output gets copied here at publish time (see
+# .github/workflows/deploy.yml) — never commit the compiled app itself.
+backend/TaskManager.Api/wwwroot/*
+!backend/TaskManager.Api/wwwroot/.gitkeep
 
 ## Node / Angular (root-level safety net; frontend/.gitignore also covers this)
 **/node_modules/
@@ -11,6 +15,7 @@ backend/**/obj/
 **/.angular/
 
 ## Editors / OS
+.vs/
 .vscode/
 .idea/
 .DS_Store

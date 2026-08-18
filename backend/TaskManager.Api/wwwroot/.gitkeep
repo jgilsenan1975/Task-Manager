@@ -1,0 +1,7 @@
+This folder is intentionally empty in source control.
+
+In production, the CI/CD pipeline (see .github/workflows/deploy.yml) copies
+the compiled Angular output (frontend/dist/task-manager-client/browser) here
+before publishing, so the API can serve the SPA as static files. For local
+development, run the Angular dev server (npm start) separately instead —
+you don't need anything in this folder.
