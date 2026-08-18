@@ -1,0 +1,21 @@
+## .NET / C#
+backend/**/bin/
+backend/**/obj/
+*.user
+*.suo
+
+## Node / Angular (root-level safety net; frontend/.gitignore also covers this)
+**/node_modules/
+**/dist/
+**/.angular/
+
+## Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+## Secrets — never commit real connection strings, JWT keys, or tokens
+**/appsettings.*.local.json
+*.env
+.env.*
