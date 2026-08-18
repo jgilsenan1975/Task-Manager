@@ -1,0 +1,28 @@
+<section class="projects">
+  <h1>Your projects</h1>
+
+  <form class="new-project" [formGroup]="form" (ngSubmit)="createProject()">
+    <input type="text" placeholder="Project name" formControlName="name" />
+    <input type="text" placeholder="Description (optional)" formControlName="description" />
+    <button type="submit" [disabled]="form.invalid">Add project</button>
+  </form>
+
+  @if (isLoading()) {
+    <p>Loading projects...</p>
+  } @else if (projects().length === 0) {
+    <p>No projects yet. Create your first one above.</p>
+  } @else {
+    <ul class="project-grid">
+      @for (project of projects(); track project.id) {
+        <li>
+          <a [routerLink]="['/projects', project.id, 'board']">
+            <h2>{{ project.name }}</h2>
+            @if (project.description) {
+              <p>{{ project.description }}</p>
+            }
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</section>

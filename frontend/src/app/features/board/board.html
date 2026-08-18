@@ -1,0 +1,35 @@
+<section class="board-page">
+  <h1>Board</h1>
+
+  <form class="new-task" [formGroup]="form" (ngSubmit)="addTask()">
+    <input type="text" placeholder="Task title" formControlName="title" />
+    <select formControlName="priority">
+      @for (priority of priorities; track priority) {
+        <option [value]="priority">{{ priority }}</option>
+      }
+    </select>
+    <button type="submit" [disabled]="form.invalid">Add task</button>
+  </form>
+
+  <div class="columns">
+    @for (column of columns(); track column.status) {
+      <div class="column">
+        <h2>{{ column.title }}</h2>
+        <div
+          class="task-list"
+          cdkDropList
+          [cdkDropListData]="column.tasks"
+          [cdkDropListConnectedTo]="connectedLists()"
+          (cdkDropListDropped)="drop($event, column.status)"
+        >
+          @for (task of column.tasks; track task.id) {
+            <div class="task-card" cdkDrag>
+              <p class="title">{{ task.title }}</p>
+              <span class="priority" [attr.data-priority]="task.priority">{{ task.priority }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</section>

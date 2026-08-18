@@ -1,0 +1,38 @@
+/* Global styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #1a1a1a;
+  background: #fafafa;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  background: #2563eb;
+  color: white;
+  font-size: 0.9rem;
+
+  &:disabled {
+    background: #a3a3a3;
+    cursor: not-allowed;
+  }
+}
+
+input,
+select {
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+
+a {
+  color: #2563eb;
+}

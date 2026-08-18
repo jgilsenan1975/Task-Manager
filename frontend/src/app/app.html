@@ -1,0 +1,17 @@
+<header class="app-header">
+  <a routerLink="/projects" class="brand">Task Manager</a>
+
+  <nav>
+    @if (auth.isAuthenticated()) {
+      <span class="user">{{ auth.currentUser()?.displayName }}</span>
+      <button type="button" (click)="logout()">Sign out</button>
+    } @else {
+      <a routerLink="/login">Sign in</a>
+      <a routerLink="/register">Sign up</a>
+    }
+  </nav>
+</header>
+
+<main>
+  <router-outlet />
+</main>

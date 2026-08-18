@@ -3,6 +3,7 @@ backend/**/bin/
 backend/**/obj/
 *.user
 *.suo
+.vs/
 
 ## Node / Angular (root-level safety net; frontend/.gitignore also covers this)
 **/node_modules/
